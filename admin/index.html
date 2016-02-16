@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Airactive</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <script src="/bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="/bower_components/angular-ui-date/src/date.js"></script>
+    <!--Chosen-->
+    <link rel="stylesheet" href="/bower_components/chosen/chosen.min.css">
+    <script src="/bower_components/chosen/chosen.jquery.min.js"></script>
+    <!--Angular Sanitizer-->
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <!--ng Dialog-->
+    <link href="/bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+    <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <!--end ng Dialog-->
+    <!--Chosen-->
+    <script src="/bower_components/angular-chosen-localytics/chosen.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="airActiveApp" ng-controller="adminController">
+<div class="header">
+    <div class="row">
+        <div class="col-lg-10">
+            <a href="">
+                <img src="../images/air_logo_white.png">
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <table style="margin-top: 5px; cursor: pointer" data-ng-click="viewAdminProfile()">
+                <tbody>
+                <tr>
+                    <td class="color-white">Superadmin</td>
+                    <td style="width: 20px">&nbsp;</td>
+                    <td><img class="img-circle" style="width: 40px; height: 40px" src="../images/a.jpg"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row entry-content">
+    <div class="col-lg-2 sidebar no-padding">
+        <h4 class="base {{menu[0]}}" ng-click="changeMenu(0, 'screens/adminAdminsView.html')">Admins</h4>
+        <h4 class="base {{menu[1]}}" ng-click="changeMenu(1, 'screens/adminProvidersView.html')">Providers</h4>
+        <h4 class="base {{menu[2]}}" ng-click="changeMenu(2, 'screens/adminInstructorsView.html')">Instructors</h4>
+        <h4 class="base {{menu[3]}}" ng-click="changeMenu(3, 'screens/adminTermsAndConditionsView.html')">T&C's</h4>
+        <h4 class="base {{menu[4]}}" ng-click="changeMenu(4, 'screens/adminBroadcastView.html')">Broadcast</h4>
+        <h4 class="base {{menu[5]}}" ng-click="changeMenu(5, 'screens/admin.promocodes.html')">Promo Codes</h4>
+        <h4 class="base {{menu[6]}}" ng-click="changeMenu(6, 'screens/adminAdvertisementsView.html')">Advertisements</h4>
+        <h4 class="base {{menu[7]}}" ng-click="redirect('/logout/')">Log Out</h4>
+    </div>
+    <div class="col-lg-9 controller">
+        <div ng-include="template"></div>
+    </div>
+</div>
+</body>
+<script>
+    var app = angular.module('airActiveApp', ['ui.tinymce', 'ui.date', 'naif.base64', 'ngSanitize', 'ngKookies', 'ngDialog',     //Angular Chosen with remote data
+        'localytics.directives']);
+</script>
+<!--Admin Controller-->
+<script src="controllers/adminController.js"></script>
+<!--Admin Profile Controller-->
+<script src="controllers/adminProfileController.js"></script>
+<!--Admin Providers Controller-->
+<script src="controllers/adminProvidersController.js"></script>
+<!--Admin Promo Codes Controller-->
+<script src="controllers/adminPromoCodesController.js"></script>
+<!--Admin Advertising Controller-->
+<script src="controllers/adminAdvertisingController.js"></script>
+<!--Admin Admins Controller-->
+<script src="controllers/adminAdminsController.js"></script>
+<!--Admin Instructors Controller-->
+<script src="controllers/adminInstructorsController.js"></script>
+<!--Admin Broadcast Controller-->
+<script src="controllers/adminBroadcastController.js"></script>
+<!--Admin Advertisements Controller-->
+<script src="controllers/adminAdvertisementsController.js"></script>
+<script src="controllers/adminTermsAndConditionsController.js"></script>
+</html>

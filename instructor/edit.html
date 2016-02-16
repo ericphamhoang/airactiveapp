@@ -1,0 +1,184 @@
+<!--Created by eric on 15/12/2015.
+--><!DOCTYPE html>
+<html data-ng-app="airActiveApp" lang="en">
+<head><title>Airactive</title>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <script src="/bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="/bower_components/angular-ui-date/src/date.js"></script>
+    <!--Angular Animate-->
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--Style-->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body data-ng-controller="instructorEditController">
+<div class="header">
+    <div class="row">
+        <div class="col-lg-10">
+            <a href="index.html">
+                <img src="../images/air_logo_white.png">
+            </a>
+        </div>
+        <div class="col-lg-2 margin-top-5" data-ng-click="viewInstructorProfile()">
+            <img class="img-circle pull-right" style="width: 40px; height: 40px" src="../images/a.jpg">
+            <div class="pull-right color-white margin-top-10 margin-right-10">
+                {{user.first_name}} {{user.last_name}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="entry-content">
+    <div class="row margin-left-0 margin-right-0">
+        <div class="col-lg-7 col-lg-offset-2">
+            <div class="controller"><h2>Hi there,</h2><br>
+                <p>Welcome to the Instructor Portal for AirActive! Please create your profile to complete your
+                    setup.</p>
+                <form class="form-horizontal">
+                    <div class="form-group"><label class="control-label col-lg-2 text-left padding-top-65">Photo</label>
+                        <div class="col-sm-4"><img src="../images/selectImage.PNG" class="img-rounded pull-left"></div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">First name *</label>
+                        <div class="col-sm-4">
+                            <!--first name-->
+                            <input type="text" placeholder="First Name" class="form-control"
+                                   data-ng-model="user.first_name"/>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Last name *</label>
+                        <div class="col-sm-4">
+                            <!--last name-->
+                            <input type="text" placeholder="Last Name" class="form-control"
+                                   data-ng-model="user.last_name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2 text-left">Fitness Australia Registration</label>
+                        <div class="col-sm-4">
+                            <!--fitness australia reg-->
+                            <input type="text" placeholder="Fitness Australia Registration" class="form-control"
+                                   data-ng-model="user.instructor.fitness_au_registration"
+                            />
+                        </div>
+                    </div>
+                    <p><em class="instruction">This may be used for special offers and discounts</em></p>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Postcode *</label>
+                        <div class="col-sm-4">
+                            <!--postcode-->
+                            <input type="text" placeholder="Postcode" class="form-control"
+                                   data-ng-model="user.postcode"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Country *</label>
+                        <div class="col-sm-4">
+                            <!--country-->
+                            <input type="text" placeholder="Country" class="form-control"
+                                   data-ng-model="user.instructor.country"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Mobile Phone *</label>
+                        <div class="col-sm-4">
+                            <!--mobile number-->
+                            <input type="text" placeholder="Mobile Phone" class="form-control"
+                                   data-ng-model="user.mobile_number"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Email *</label>
+                        <div class="col-sm-4">
+                            <!--email-->
+                            <input type="text" placeholder="Email" class="form-control"
+                                   data-ng-model="user.email"/>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Website</label>
+                        <div class="col-sm-4">
+                            <!--website-->
+                            <input type="text" placeholder="Website" class="form-control"
+                                   data-ng-model="user.instructor.website"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Facebook</label>
+                        <div class="col-sm-4">
+                            <!--facebook-->
+                            <input type="text" placeholder="Facebook URL" class="form-control"
+                                   data-ng-model="user.instructor.facebook"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Twitter</label>
+                        <div class="col-sm-4">
+                            <!--twitter-->
+                            <input type="text" placeholder="Twitter handle" class="form-control"
+                                   data-ng-model="user.instructor.twitter"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2 text-left">Instagram</label>
+                        <div class="col-sm-4">
+                            <!--instagram-->
+                            <input type="text" placeholder="Instagram username" class="form-control"
+                                   data-ng-model="user.instructor.instagram"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">Qualifications &
+                        Experience</label>
+                        <div class="col-sm-4">
+                            <textarea placeholder="E.g. Certified Les Mills Instructor"
+                                      class="form-control height-150"
+                                      data-ng-model="user.instructor.qualifications"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="control-label col-lg-2 text-left">About me</label>
+                        <div class="col-sm-4">
+                            <textarea placeholder="Something about yourself..."
+                                      class="form-control height-150"
+                                      data-ng-model="user.instructor.about_me"
+                            ></textarea></div>
+                    </div>
+                    <p>I have read and accept the Terms & Conditions</p>
+                    <span class="icheck {{termsAndConditionsAccept}}" ng-click="termsAndConditionsAccept = !termsAndConditionsAccept">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    </span><br>
+                </form>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <p>
+                            <!--Update Instructor-->
+                            <button data-ng-click="updateInstructor()"
+                                    class="btn btn-green round-border full-width-80">Save
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var app = angular.module('airActiveApp', ['ui.tinymce', 'ngKookies', 'ui.date', 'naif.base64', 'ngAnimate']);
+</script>
+<script src="controllers/instructorEditController.js"></script>
+
+<!--Notie JS-->
+<script src="../bower_components/notie/notie.js"></script>
+</body>
+</html>

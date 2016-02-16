@@ -1,0 +1,42 @@
+<!--Created by eric on 15/12/2015.-->
+<div data-ng-controller="adminTermsAndConditionsController">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-10"><h4>Provider Terms & Conditions</h4></div>
+            <div class="col-lg-2">
+                <button ng-click="provider.editOn()" ng-hide="provider.isEdit"
+                        class="btn btn-green round-border full-width-80 pull-right">Edit
+                </button>
+            </div>
+        </div>
+        <div ng-hide="provider.isEdit"><p ng-bind-html="provider.termsAndConditions"></p></div>
+        <div ng-show="provider.isEdit"><textarea ui-tinymce="" style="width:100%; height: 500px"
+                                        ng-model="provider.termsAndConditions"></textarea></div>
+        <br/>
+        <div class="form-group">
+            <div class="col-lg-2">
+                <button ng-click="provider.editOff()" class="btn btn-green round-border full-width-80">Save</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-10"><h4>Instructor Terms & Conditions</h4></div>
+            <div class="col-lg-2">
+                <button ng-click="instructor.editOn()" ng-hide="instructor.isEdit"
+                        class="btn btn-green round-border full-width-80 pull-right">Edit
+                </button>
+            </div>
+        </div>
+        <div ng-hide="instructor.isEdit"><p ng-bind-html="instructor.termsAndConditions"></p></div>
+        <div ng-show="instructor.isEdit"><textarea ui-tinymce="" style="width:100%; height: 500px"
+                                                 ng-model="instructor.termsAndConditions"></textarea></div>
+        <br/>
+        <div class="form-group">
+            <div class="col-lg-2">
+                <button ng-click="instructor.editOff()" class="btn btn-green round-border full-width-80">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

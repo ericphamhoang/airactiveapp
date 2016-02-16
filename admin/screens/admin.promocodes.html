@@ -1,0 +1,93 @@
+<div data-ng-controller="adminPromoCodesController">
+    <div ng-show="isListView" class="row">
+        <div class="col-lg-10"><h3>Promo Codes</h3><br/></div>
+        <div class="col-lg-2">
+            <button ng-click="toggleAddPromoView()" class="btn btn-green round-border full-width">Create Promo</button>
+        </div>
+    </div>
+    <div ng-show="isListView" class="row">
+        <table width="100%" class="table">
+            <thead>
+            <tr>
+                <th style="width:20%"><b>Promo Code</b></th>
+                <th style="width:20%"><b>Discount (%)</b></th>
+                <th style="width:20%"><b>Start Date</b></th>
+                <th style="width:20%"><b>End Date</b></th>
+                <th style="width:20%"><b>Functions</b></th>
+            </tr>
+            </thead>
+            <tbody><!--ng repeat here-->
+            <tr ng-repeat="item in promoCodes track by $index">
+                <td>
+                    <span ng-hide="item.isEdit">{{item.name}}</span>
+                    <input ng-show="item.isEdit" type="text"
+                           ng-model="item.name"
+                           class="form-control"/>
+                </td>
+                <td><span ng-hide="item.isEdit">{{item.discount}}</span><input ng-show="item.isEdit" type="text"
+                                                                               ng-model="item.discount"
+                                                                               class="form-control"/></td>
+                <td><span ng-hide="item.isEdit">{{item.start_date | date : 'MM/dd/yyyy'}}</span><input
+                        ng-show="item.isEdit" ui-date="" ui-date-format="m/d/yy" type="text" ng-model="item.start_date"
+                        class="form-control"/></td>
+                <td><span ng-hide="item.isEdit">{{item.end_date | date : 'MM/dd/yyyy'}}</span><input
+                        ng-show="item.isEdit" ui-date="" ui-date-format="m/d/yy" type="text" ng-model="item.end_date"
+                        class="form-control"/></td>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td ng-click="item.isEdit = !item.isEdit" class="function"><i
+                                    class="glyphicon glyphicon-pencil"></i><span>&nbsp;{{item.isEdit?'SAVE':'EDIT'}}</span>
+                            </td>
+                            <td ng-click="removePromocode($index)" class="function"><i
+                                    class="glyphicon glyphicon-trash"></i><span>&nbsp;REMOVE</span><i
+                                    class="glyphicon glyphicon-chevron-right pull-right"></i></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="isAddPromoView" class="row"><h3>Create Promo</h3><br/>
+        <form class="form-horizontal">
+            <div class="form-group"><label class="text-left col-lg-2 control-label">Name (50 chars.)*</label>
+                <div class="col-lg-3"><input type="text" placeholder="Free Session" ng-model="newPromoCode.name"
+                                             class="form-control"/></div>
+            </div>
+            <p>The promotion will only be valid between the following dates:</p>
+            <div class="form-group"><label class="text-left col-lg-2 control-label">Start Date*</label>
+                <div class="col-lg-3"><input type="text" placeholder="12-08-2015" ui-date=""
+                                             ng-model="newPromoCode.start_date" class="form-control"/></div>
+            </div>
+            <div class="form-group"><label class="text-left col-lg-2 control-label">End Date*</label>
+                <div class="col-lg-3"><input type="text" placeholder="19-09-2015" ui-date=""
+                                             ng-model="newPromoCode.end_date" class="form-control"/></div>
+            </div>
+            <div class="form-group"><label class="text-left col-lg-2 control-label">Discount Type</label>
+                <div class="col-lg-3"><input type="text" placeholder="FREE Session"
+                                             ng-model="newPromoCode.discount_type" class="form-control"/></div>
+            </div>
+            <p><em class="instruction">Enter the percentage of discount for the promotion, (FREE SESSION is the only
+                Option at this time)</em></p>
+            <div class="form-group"><label class="text-left col-lg-2 control-label">Provider Type</label>
+                <div class="col-lg-3"><input type="text" placeholder="Select" ng-model="newPromoCode.provider_type"
+                                             class="form-control"/></div>
+            </div>
+            <div class="form-group"><label class="text-left col-lg-2 control-label">Code</label><label
+                    class="text-left col-lg-6 control-label color-pink">{{newPromoCode.code}}</label></div>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <button data-ng-click="generateCode()" class="btn btn-green round-border full-width">Generate Code
+                    </button>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <button data-ng-click="" class="btn btn-green round-border full-width-80">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

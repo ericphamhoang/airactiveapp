@@ -1,0 +1,60 @@
+<!--Created by eric on 5/12/2015.
+--><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title><!-- Foundation-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/css/foundation.min.css" rel="stylesheet"
+          type="text/css"><!-- Animate CSS-->
+    <link href="//cdn.jsdelivr.net/animatecss/3.4.0/animate.min.css" type="text/css" rel="stylesheet"><!-- Theme-->
+    <!--Style-->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body data-ng-app="airActiveApp" data-ng-controller="forgotPasswordController">
+<!--Css Loader-->
+<div class="cssload-loader" ng-show="showLoader">
+    <div class="cssload-flipper">
+        <div class="cssload-front"></div>
+        <div class="cssload-back"></div>
+    </div>
+</div>
+<!--End Css Loader-->
+<div class="content">
+    <div class="row">
+        <form class="form-horizontal" name="forgotPassword" novalidate data-ng-submit="formSubmit()">
+            <div class="form-group">
+                <div class="columns medium-4 medium-offset-4">
+                    <div class="form-forgot-password text-center"><p>
+                        <a href="/">
+                            <img src="../images/logo_big.png">
+                        </a>
+                    </p>
+                        <div class="div-instruction animated fadeIn"><p><strong>Forgot your Password?</strong></p>
+                            <p>Please enter your email address and we'll reset your password</p></div>
+                        <div class="email">
+                            <input name="email" type="email" placeholder="Email address"
+                                   class="animated fadeIn input-round" data-ng-model="email">
+                        </div>
+                        <button class="button-big-green animated fadeIn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body><!--Created by eric on 5/12/2015.
+--><!-- Theme// UIKIT-->
+<!--Angular JS-->
+<script src="/bower_components/angular/angular.min.js"></script>
+<!--Cookies-->
+<script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script src="controllers/forgotPasswordController.js"></script>
+
+<!--Notie JS-->
+<script src="/bower_components/notie/notie.js"></script>
+</html>

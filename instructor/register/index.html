@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html data-ng-app="airActiveApp" lang="en">
+<head>
+    <title>Register Instructor</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+    <!-- Geolocation auto complete-->
+    <script src="controllers/registerInstructorController.js"></script>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!--Style-->
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!--End Style-->
+</head>
+<body data-ng-controller="registerInstructorController">
+<div class="header"><a href="/"><img src="//app.airactiveapp.com/images/air_logo_white.png"></a></div>
+<!--Css Loader-->
+<div class="cssload-loader" ng-show="showLoader">
+    <div class="cssload-flipper">
+        <div class="cssload-front"></div>
+        <div class="cssload-back"></div>
+    </div>
+</div>
+<!--End Css Loader-->
+<div class="entry-content text-center">
+    <h2 class="margin-top-50">Instructor Registration Page</h2>
+    <div name="information">
+        <p class="margin-bottom-0">
+            <em class="instruction">You're one step away from accessing all that AirActive offers!</em>
+        </p>
+        <p class="margin-bottom-0">
+            <em class="instruction">Your password will be sent to the email address you provide below.</em>
+        </p>
+        <p class="margin-bottom-0">
+            <em class="instruction">Log In using your Email address, and Password</em>
+        </p>
+    </div>
+    <h3 class="margin-bottom-15">Your Details</h3>
+    <div class="row business-details text-left margin-left-0 margin-right-0">
+        <div class="col-lg-6 col-lg-offset-2">
+            <form class="form-horizontal">
+                <!--Last Name-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Name: </label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newInstructor.last_name" class="form-control">
+                    </div>
+                </div>
+                <!--First Name-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">First Name: </label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newInstructor.first_name" class="form-control">
+                    </div>
+                </div>
+                <!--Email-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Email: </label>
+                    <div class="col-sm-8">
+                        <input type="email" data-ng-model="newInstructor.email" class="form-control">
+                    </div>
+                </div>
+                <!--Confirm Email-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Confirm Email: </label>
+                    <div class="col-sm-8">
+                        <input type="email" data-ng-model="newInstructor.email_confirm" class="form-control">
+                    </div>
+                </div>
+                <!--Mobile-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Mobile</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newInstructor.instructor_mobile" class="form-control">
+                    </div>
+                </div>
+                <!--Country-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Country</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" data-ng-model="newInstructor.country"
+                                ng-options=" country for country in countries"></select>
+                    </div>
+                </div>
+                <!--Mobile-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Postcode</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newInstructor.postcode" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-offset-6">
+                    <button data-ng-click="registerInstructor()" class="button-green margin-top-20 margin-bottom-50">Register with AirActive</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!----Notie JS-->
+<script src="/bower_components/notie/notie.js"></script>
+</body>
+</html><!-- Our main stylesheet-->

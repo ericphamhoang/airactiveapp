@@ -1,0 +1,70 @@
+<div>
+    <h2>Hi {{user.first_name}} {{user.last_name}},</h2><br/>
+    <p>Today's Date: {{date | date : 'EEEE MMMM dd, yyyy'}}</p>
+    <p>Welcome to the Instructor Portal of AirActive. Please check if your details are current.</p><br/>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="col-lg-6 instructor-avatar-wrapper">
+                    <img src="../images/a.jpg" style="margin: 0 auto"
+                         class="img-circle img-responsive"/>
+                </div>
+                <div class="col-lg-6 instructor-badge-wrapper">
+                    <div class="round-border text-center instructor-badge">
+                        <i class="glyphicon glyphicon-star"></i>
+                        <h2>{{user.instructor.ratings_average}}</h2>
+                        <p>{{user.instructor.ratings_total}}</p></div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="form-group"><label class="control-label text-left col-sm-2">Name</label><label
+                class="control-label text-left col-sm-2">{{user.first_name}} {{user.last_name}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Fitness Australia No:</label>
+            <label class="control-label text-left col-sm-2">{{user.instructor.fitness_au_registration}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Postcode</label>
+            <label class="control-label text-left col-sm-2">{{user.postcode}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Country</label>
+            <label class="control-label text-left col-sm-2">{{user.instructor.country}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Mobile Phone</label>
+            <label class="control-label text-left col-sm-2">{{user.mobile_number}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Email</label>
+            <label class="control-label text-left col-sm-2">{{user.email}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Website</label>
+            <label class="control-label text-left col-sm-2">{{user.instructor.website}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Facebook</label>
+            <label class="control-label text-left col-sm-2">{{user.instructor.facebook}}</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-left col-sm-2">Twitter</label>
+            <label class="control-label text-left col-sm-2">{{user.instructor.twitter}}</label>
+        </div>
+        <div class="form-group"><label class="control-label text-left col-sm-2">Instagram</label><label
+                class="control-label text-left col-sm-2">{{user.instructor.instagram}}</label></div>
+        <div class="form-group"><label class="control-label text-left col-sm-2">Qualifications& Experience</label><label
+                class="control-label text-left col-sm-2">{{user.instructor.qualifications}}</label></div>
+        <div class="form-group"><label class="control-label text-left col-sm-2">About me</label><label
+                class="control-label text-left col-sm-2">{{user.instructor.about_me}}</label></div>
+        <div class="form-group">
+            <div class="col-sm-2">
+                <button ng-click="gotoEdit()" class="btn btn-green full-width-80 round-border">
+                    Edit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

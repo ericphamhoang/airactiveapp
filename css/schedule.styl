@@ -1,0 +1,116 @@
+.schedule-content
+  margin 1vh 10px
+  .calendar-selector
+    margin-top 3vh
+    //left and right button
+    .glyphicon
+      margin-left 2px
+      margin-right 2px
+  .active-filter
+    border 1px solid lightgrey
+    border-radius 3px
+    label
+      font-size 0.6rem
+      color: slategrey
+      padding-top 0
+    .active-filter-fields
+      padding-top 1.5vh
+    .filter-btn-group
+      padding-top 2vh
+    .form-group
+      margin-bottom 5px
+
+  //Full Width Calendar
+  .views
+    span
+      cursor pointer
+      color #9f9f9f
+      &.true
+        color #a0be37
+  .ui-calendar
+    margin-top 2vh
+    tbody
+      tr
+        td
+          background transparent
+
+  //Small Calendar on the left hand side
+  .k-calendar
+    margin 2vh 1vw
+    border none !important
+    .k-header
+      background #fff !important
+      &>a
+        border-radius 0
+    th
+      background #fff !important
+      font-weight bold
+      border none !important
+    td
+      border-radius 0
+      &.k-state-selected
+        background #c8415f !important
+      &.k-today
+        background #a0be37 !important
+    .k-footer
+      display none
+
+  label.filter
+    padding-top 3px !important
+
+.menu
+  padding 0 10px
+  &> div > div
+    padding-top 5px
+    padding-bottom 5px
+    &.active
+      border-bottom 5px solid #a0be37
+
+
+//Single View
+.single-view-wrapper
+  z-index 10
+  background-color rgba(255,255,255, 0.8)
+  position absolute
+  width 99%
+  height 100%
+  top 0
+  .single-view
+    width 60%
+    background white
+    border 1px solid lightgray
+    .row
+      margin 5px 15px
+
+.copy-view-wrapper
+  @extend .single-view-wrapper
+  .copy-view
+    width 60%
+    background white
+    border 1px solid lightgray
+    .row
+      margin 5px 15px
+
+.edit-view-wrapper
+  @extend .single-view-wrapper
+  .edit-view
+    width 60%
+    background white
+    border 1px solid lightgray
+    .row
+      margin 5px 15px
+
+.attendees-view-wrapper
+  @extend .single-view-wrapper
+  .attendees-view
+    width 60%
+    background white
+    border 1px solid lightgray
+    min-height 100vh
+    .row
+      margin 5px 15px
+
+
+//Google auto complete
+.pac-container
+    z-index: 1000000000 !important

@@ -1,0 +1,559 @@
+<div class="popup-wrapper" ng-show="copyView.isCategorySelectView">
+    <div class="close">
+        <button class="btn btn-pink" ng-click="copyView.isCategorySelectView=false">X</button>
+    </div>
+    <div class="popup">
+        <form class="form-horizontal">
+            <div class="row margin-left-0 margin-right-0">
+                <div class="form-group col-lg-4" ng-repeat="category in copyView.selectableCategories track by $index">
+                    <label class="col-sm-10 control-label text-left">{{category.name}}</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="checkbox" ng-model="category.isSelected"
+                               ng-disabled="copyView.isMaxCategory() && !category.isSelected">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--End Category Popup Form-->
+<!--TODO: Activity Types Popup Form-->
+<div class="popup-wrapper" ng-show="copyView.isActivityTypeSelectView">
+    <div class="close">
+        <button class="btn btn-pink" ng-click="copyView.isActivityTypeSelectView=false">X</button>
+    </div>
+    <div class="popup">
+        <form class="form-horizontal">
+            <div class="row">
+                <!--Col 1-->
+                <div class="col-lg-3" ng-repeat="item in copyView.selectableActivityTypesSub">
+                    <div class="form-group margin-bottom-0 margin-left-0 margin-right-0"
+                         ng-repeat="activityType in item track by $index">
+                        <h3 ng-if="activityType.category.name"
+                            class="activity-type-header-{{activityType.category.id}}">
+                            {{activityType.category.name}}</h3>
+                        <label class="col-sm-10 control-label text-left">{{activityType.name}}</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="checkbox" ng-model="activityType.isSelected"
+                                   ng-disabled="copyView.isMaxActivityType() && !activityType.isSelected">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="copy-view pull-right">
+        <div class="row no-margin-horizontal banner background-yellow">
+            <div class="col-lg-12 color-white">
+                {{singleViewItem.name}}, <span
+                    ng-repeat="category in singleViewItem.categories">[{{category.name}}] </span> ,
+                {{singleViewItem.startDate | date: "hh:mma, EEEE, MMMM, dd, yyyy"}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div name="providerAddActivity" class="form-horizontal" novalidate>
+                    <h2 class="screen-header">Copy Activity</h2>
+
+                    <p class="margin-top-20 margin-bottom-10">
+                        Please Describe your Activity
+                    </p>
+
+                    <!--Activity Name-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">Activity Name*</label>
+                        <div class="col-sm-3">
+                            <input name="name" type="text" placeholder="Name (40 characters max)" class="form-control" required
+                                   maxlength="40"
+                                   data-ng-model="newActivity.name">
+                        </div>
+                    </div>
+
+                    <!--TODO: Category-->
+                    <div name="category">
+                        <p class="margin-top-30">
+                            Up to five <strong>categories</strong> can be selected (click the plus to add a category)
+                        </p>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">
+                                Category*
+                            </label>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <!--Bind with selectableCategories and categories-->
+                                        <input type="text" class="form-control" placeholder="Select Category">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <!--TODO: Category Pop up-->
+                                        <button class="btn btn-green width-75" ng-click="copyView.isCategorySelectView=true">+</button>
+                                    </div>
+                                </div>
+                                <!--Repeater-->
+                                <div ng-repeat="category in copyView.selectableCategories track by $index">
+                                    <div class="form-group" ng-show="category.isSelected">
+                                        <div class="col-sm-9">
+                                            <!--Bind with selectableCategories and categories-->
+                                            <input type="text" class="form-control" ng-model="category.name" disabled>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="btn btn-pink width-75" ng-click="category.isSelected=false">-
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Repeater-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 control-label text-left">
+                                <strong class="margin-right-5">Selected:</strong>
+                    <span ng-repeat="category in copyView.selectableCategories track by $index">
+                        <span ng-show="category.isSelected">{{category.name}},</span>
+                    </span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <em class="color-light-grey col-sm-12 margin-top-20">
+                                If you cannot find a CATEGORY that properly describes your activity, then please forward a
+                                request
+                                to AirActive.
+                            </em>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">
+                                Request
+                            </label>
+                            <div class="col-sm-3">
+                                <a href="mailto:support@airactiveapp.com?subject=I'd like to request a new Category">
+                                    <button class="btn btn-orange width-100">
+                                        Request new category
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Category-->
+
+                    <!--TODO: Activity Types-->
+                    <div name="activityTypes">
+                        <p class="margin-top-30">
+                            Up to five <strong>activity types</strong> can be selected (click the plus to add an activity)
+                        </p>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">
+                                Activity Types*
+                            </label>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <!--Bind with selectableCategories and categories-->
+                                        <input type="text" class="form-control" placeholder="Select Activity Type">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <!--TODO activity type pop up-->
+                                        <button class="btn btn-green width-75" ng-click="copyView.isActivityTypeSelectView=true">+
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!--Repeater-->
+                                <div ng-repeat="activityType in copyView.selectableActivityTypes track by $index">
+                                    <div class="form-group" ng-show="activityType.isSelected">
+                                        <div class="col-sm-9">
+                                            <!--Bind with selectableCategories and categories-->
+                                            <input type="text" class="form-control" ng-model="activityType.name" disabled>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="btn btn-pink width-75" ng-click="activityType.isSelected=false">-
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Repeater-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 control-label text-left">
+                                <strong class="margin-right-5">Selected:</strong>
+                    <span ng-repeat="activityType in copyView.selectableActivityTypes track by $index">
+                        <span ng-show="activityType.isSelected">{{activityType.name}},</span>
+                    </span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <em class="color-light-grey col-sm-12 margin-top-20">
+                                If you cannot find an ACTIVITY TYPE that properly describes your activity, then please forward a
+                                request
+                                to AirActive.
+                            </em>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">
+                                Request
+                            </label>
+                            <div class="col-sm-3">
+                                <a href="mailto:support@airactiveapp.com?subject=I'd like to request a new Activity Type">
+                                    <button class="btn btn-orange width-100">
+                                        Request new activity type
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Activity Types-->
+
+                    <!--Description-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">Description</label>
+                        <div class="col-sm-4">
+                <textarea type="text" placeholder="Description" class="form-control"
+                          data-ng-model="newActivity.description">
+                </textarea>
+                        </div>
+                    </div>
+                    <!--Enviroment-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">Environment*</label>
+                        <div class="col-sm-3">
+                            <select data-ng-model="newActivity.environment"
+                                    data-ng-options="option.name for option in copyView.environments track by option.id"
+                                    class="form-control"></select>
+                        </div>
+                    </div>
+                    <!--Instructor-->
+                    <div name="instructor">
+                        <div class="form-group">
+                            <p class="col-sm-5">
+                                Do you wish to allocate an instructor for this activity?
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">Allocate Instructor*</label>
+                            <div class="col-sm-4">
+                    <span class="icheck {{newActivity.hasInstructor}}"
+                          data-ng-click="newActivity.hasInstructor = !newActivity.hasInstructor">
+                        <i class="glyphicon glyphicon-ok"></i>
+                    </span>
+                            </div>
+                        </div>
+                        <div ng-show="newActivity.hasInstructor">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">
+                                    Instructor*
+                                </label>
+                                <div class="col-sm-3">
+                                    <select data-ng-model="newActivity.instructor"
+                                            data-ng-options="option.name+', '+option.country+', '+option.mobile_number for option in copyView.recentInstructors track by option.id"
+                                            class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">
+                                    <strong>OR</strong>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">
+                                    Search Instructor
+                                </label>
+                                <div class="col-sm-3">
+                                    <select data-ng-model="newActivity.instructor"
+                                            data-ng-options="option.name+', '+option.country+', '+option.mobile_number for option in instructors track by option.id"
+                                            chosen="" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Intensity-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">
+                            Intensity
+                        </label>
+                        <div class="col-sm-3">
+                            <select data-ng-model="newActivity.intensity"
+                                    data-ng-options="option.name for option in copyView.intensities track by option.id"
+                                    class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">
+                            Price*($)
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="price" ng-model="newActivity.price" placeholder="10.00"
+                                   class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <em class="col-sm-12 instruction">
+                            This is the price that will be displayed to the user
+                        </em>
+                    </div>
+
+                    <div name="where-and-when">
+                        <h2 class="margin-top-30">Where & When the Activity will takeplace</h2><br/>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">Date*</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="start_date" ui-date="" class="form-control" placeholder="Select Date"
+                                       data-ng-model="newActivity.startDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">Start Time*</label>
+                            <div class="col-sm-3">
+                                <input ui-timepicker="timePickerOptions" name="start_time" data-ng-model="newActivity.startTime"
+                                       type="text"
+                                       placeholder="10:10" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">Duration (mins.)*</label>
+                            <div class="col-sm-3">
+                                <input name="duration" data-ng-model="newActivity.duration" type="text" placeholder="60"
+                                       class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left">Address*</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="location"
+                                       g-places-autocomplete force-selection="true" options="autocompleteOptions"
+                                       ng-model="newActivity.googleLocation" autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <em class="col-sm-12 instruction">This address will be used for navigation to your Activity</em>
+                        </div>
+                        <div class="form-group">
+                            <p class="col-lg-12">Is the address given above the address at which the activity will take
+                                place?*</p>
+                            <div class="col-sm-12">
+                           <span ng-click="newActivity.sameAddress = !newActivity.sameAddress"
+                                 class="icheck {{newActivity.sameAddress}}"><i
+                                   class="glyphicon glyphicon-ok"></i></span>
+                            </div>
+                        </div>
+                        <!--Hide this section if user doesn't need a second address-->
+                        <div class="form-group" ng-hide="newActivity.sameAddress">
+                            <label class="col-sm-2 control-label text-left">Address*</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" g-places-autocomplete force-selection="true"
+                                       options="autocompleteOptions" ng-model="newActivity.googleLocation2"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="col-sm-12">Do you wish to allocate a location for this activity
+                                <i ng-mouseover="showMessage('Apart from helping users find the correct place that their Activity is occurring (such as a room or space in your facility, or other directions specific to outdoor locations such as “Near the Statue in South Park”), Locations are a powerful tool for managing bookings across your facility or activity set. Locations can be “room” type descriptors (“Cardio”, “Gym Floor”, “Pool” etc), but can also be used to define individual staff resources (“Pete G – Gym”), or even to allocate or “split” different sections of a larger complex (such as “Gym - Weight Area”, “Gym - Cardio Area”). The Locations you choose will appear in the Day View of your Schedule, and can help you manage your booking across different Location resources.Please see our Help Section for some further help with the powerful use of the Locations Feature.')"
+                                   class="glyphicon glyphicon-question-sign">
+                                </i>
+                            </p>
+                            <div class="col-sm-12">
+                <span ng-click="newActivity.hasLocation = !newActivity.hasLocation"
+                      class="icheck {{newActivity.hasLocation}}"><i
+                        class="glyphicon glyphicon-ok"></i>
+                </span>
+                            </div>
+                            <em class="col-sm-12 instruction margin-top-10">Using
+                                Locations helps users better find your Activity (eg "Room 2"), and gives you more control over
+                                the
+                                use
+                                of your facillities</em>
+                        </div>
+                        <div ng-show="newActivity.hasLocation">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">Previous Locations</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control" ng-model="newActivity.location"
+                                            ng-options="option for option in copyView.recentLocations track by option">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <strong>OR</strong>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">Add location</label>
+                                <div class="col-sm-5">
+                <textarea data-ng-model="newActivity.new_location"
+                          placeholder="New Location (200 characters)" class="form-control"></textarea><em></em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div name="recurrence">
+                        <h2>Recurrences</h2>
+                        <div class="form-group">
+                            <p class="col-sm-12">Do you wish to set Recurrences for this Activity?</p>
+                            <div class="col-sm-12"><span ng-click="newActivity.is_recurrent = !newActivity.is_recurrent"
+                                                         class="icheck {{newActivity.is_recurrent}}"><i
+                                    class="glyphicon glyphicon-ok"></i></span>
+                            </div>
+                        </div>
+                        <div ng-show="newActivity.is_recurrent">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label text-left">Frequency</label>
+                                <div class="col-sm-3">
+                                    <select data-ng-model="newActivity.recurrency_frequency"
+                                            ng-change="changeRecurrence()"
+                                            class="form-control">
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="daily">Daily</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--TODO: Weekly group-->
+                            <div ng-show="newActivity.recurrency_frequency === 'weekly'">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">Every</label>
+                                    <div class="col-sm-1"><input data-ng-model="newActivity.recurrency_every" placeholder="1"
+                                                                 class="form-control"/></div>
+                                    <div class="col-sm-2"><label class="control-label"> Week(s)</label></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">On</label>
+                                    <div class="col-sm-10">
+                                        <div class="width-5 margin-right-5 pull-left" ng-repeat="item in newActivity.recurrenceArray track by $index">
+                                            <input type="text" class="form-control input-green {{item.status}}"
+                                                   ng-model="item.name"
+                                                   ng-click="item.status = !item.status" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">End Date</label>
+                                    <div class="col-sm-3">
+                                        <input data-ng-model="newActivity.recurrenceEnd" type="text" ui-date=""
+                                               placeholder="7/9/2015"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--TODO: Monthly Group-->
+                            <div ng-show="newActivity.recurrency_frequency === 'monthly'">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">Every</label>
+                                    <div class="col-sm-1">
+                                        <input data-ng-model="newActivity.recurrency_every" placeholder="1"
+                                               class="form-control"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label"> Month(s)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">On</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" ng-model="newActivity.recurrency_string">
+                                            <option value="day">Day</option>
+                                            <option value="first">First</option>
+                                            <option value="second">Second</option>
+                                            <option value="third">Third</option>
+                                            <option value="forth">Forth</option>
+                                            <option value="last">Last</option>
+                                        </select>
+                                        <!--<input ng-model="newActivity.recurrency_string" placeholder="Day" class="form-control"/>-->
+                                    </div>
+                                    <div ng-show="newActivity.recurrency_string === 'day'" class="col-sm-1">
+                                        <input ng-model="newActivity.recurrency_on" placeholder="7" class="form-control"/>
+                                    </div>
+                                    <div class="col-sm-2" ng-hide="newActivity.recurrency_string === 'day'">
+                                        <select class="form-control" data-ng-model="newActivity.recurrency_string_extension">
+                                            <option value="sunday">Sunday</option>
+                                            <option value="monday">Monday</option>
+                                            <option value="tuesday">Tuesday</option>
+                                            <option value="wednesday">Wednesday</option>
+                                            <option value="thursday">Thursday</option>
+                                            <option value="friday">Friday</option>
+                                            <option value="saturday">Saturday</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">End Date</label>
+                                    <div class="col-sm-3">
+                                        <input data-ng-model="newActivity.recurrenceEnd" type="text" ui-date=""
+                                               placeholder="7/9/2015"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--TODO: Daily Group-->
+                            <div ng-show="newActivity.recurrency_frequency ==='daily'">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">Every</label>
+                                    <div class="col-sm-1"><input data-ng-model="newActivity.recurrency_every"
+                                                                 placeholder="1"
+                                                                 class="form-control"/></div>
+                                    <div class="col-sm-2"><label class="control-label"> Day(s)</label></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label text-left">End Date</label>
+                                    <div class="col-sm-3">
+                                        <input data-ng-model="newActivity.recurrenceEnd" type="text" ui-date=""
+                                               placeholder="7/9/2015"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Activity Settings</h2><br/>
+                <div class="form-group"><label class="col-sm-2 control-label text-left">Capacity*</label>
+                    <div class="col-sm-3">
+                        <input ng-model="newActivity.capacity" placeholder="Capacity" class="form-control"/>
+                    </div>
+                </div>
+                <em class="instruction">AirActive will stop accepting bookings once this number is reached</em>
+                <h4>Do you wish to flag this Activity as an "All Day" Activity?</h4>
+                <p><span ng-click="newActivity.flag_all_day = !newActivity.flag_all_day"
+                         class="icheck {{newActivity.flag_all_day}}"><i
+                        class="glyphicon glyphicon-ok"></i></span>
+                </p><em class="instruction">An "All Day" Activity will
+                appear on users' Search Results during the entire duration of the Activity Time</em>
+                <h4>Bookings Required before Midnight the previous day?</h4>
+                <p><span ng-click="newActivity.flag_midnight = !newActivity.flag_midnight"
+                         class="icheck {{newActivity.flag_midnight}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></p>
+                <h4>Is this Activity Free For Members of you Business?</h4>
+                <p><span ng-click="newActivity.flag_free_members = !newActivity.flag_free_members"
+                         class="icheck {{newActivity.flag_free_members}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></p>
+                <h4>Is the user required to pay any additional fees to access this Activity?</h4>
+                <p><span ng-click="newActivity.flag_adition_fees = !newActivity.flag_adition_fees"
+                         class="icheck {{newActivity.flag_adition_fees}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></p><em class="instruction">Such as Venue admittance fees
+                and other Sundry Costs</em><br/><br/>
+                <div class="row">
+                    <!--Add Activity-->
+
+                    <!--ng-disabled="providerAddActivity.name.$invalid-->
+                    <!--|| selected_categories.length === 0-->
+                    <!--|| selected_activity_types.length === 0"-->
+
+                    <button class="btn btn-green round-border"
+                            data-ng-click="copyView.addActivity()">Save
+                    </button>
+                    <!--Cancel-->
+                    <button class="btn btn-pink round-border"
+                            ng-click="copyView.close()">
+                        Cancel
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

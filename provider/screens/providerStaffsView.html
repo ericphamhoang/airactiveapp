@@ -1,0 +1,122 @@
+<div data-ng-controller="providerStaffsController" class="controller">
+    <div ng-hide="isAddStaff">
+        <div class="row">
+            <div class="col-lg-10"><h2>Staff</h2></div>
+            <div class="col-lg-2">
+                <button ng-click="openAddStaffView()" class="btn btn-green round-border full-width-80 pull-right">Add
+                    Staff
+                </button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-2"><select class="form-control round-border">
+                    <option>Active Only</option>
+                </select></div>
+                <div class="col-lg-8"><input type="text" placeholder="Search" class="form-control round-border"/></div>
+                <div class="col-lg-2">
+                    <button class="btn btn-green round-border full-width">Search</button>
+                </div>
+            </div>
+            <table width="100%" class="table">
+                <thead>
+                <tr>
+                    <th><b>Username</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th><b>Name</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th><b>Email</b></th>
+                    <th><b>Manager</b></th>
+                    <th><b>Scheduler</b></th>
+                    <th><b>View Only</b></th>
+                    <th><b>Status</b></th>
+                    <th><b>Functions</b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="staff in staffs track by $index">
+                    <td>{{staff.user.email}}</td>
+                    <td>{{staff.user.name}}</td>
+                    <td>{{staff.user.email}}</td>
+                    <td><span class="icheck {{staff.user.staff_manager}}"><i class="glyphicon glyphicon-ok"></i></span>
+                    </td>
+                    <td><span class="icheck {{staff.user.staff_scheduler}}"><i class="glyphicon glyphicon-ok"></i></span>
+                    </td>
+                    <td><span class="icheck {{staff.user.staff_view_only}}"><i class="glyphicon glyphicon-ok"></i></span>
+                    </td>
+                    <td>{{staff.user.active?'Enable':'Disable'}}</td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td><i class="glyphicon glyphicon-pencil"></i><span> EDIT</span></td>
+                                <td><i class="glyphicon glyphicon-pause"></i><span> {{staff.user.active?'DISABLE':'ENABLE'}}</span><i
+                                        class="glyphicon glyphicon-chevron-right pull-right"></i></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div ng-show="isAddStaff"><h3>Add Staff</h3><br/>
+        <form class="form-horizontal">
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Last Name</label>
+                <div class="col-lg-6">
+                    <input type="text" placeholder="Last Name" class="form-control"
+                    data-ng-model="newStaff.last_name"
+                    />
+                </div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">First Name</label>
+                <div class="col-lg-6"><input type="text" placeholder="First Name" class="form-control"
+                                             data-ng-model="newStaff.first_name"/>
+                </div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Email</label>
+                <div class="col-lg-6"><input type="text" placeholder="Email" class="form-control"
+                                             data-ng-model="newStaff.email"
+                /></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Manager<i uib-tooltip="Manager"
+                                                                                              class="glyphicon glyphicon-question-sign"></i></label>
+                <div class="col-lg-6"><span data-ng-click="newStaff.staff_manager = !newStaff.staff_manager"
+                                            class="icheck {{newStaff.staff_manager}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Scheduler<i uib-tooltip="Scheduler"
+                                                                                                class="glyphicon glyphicon-question-sign"></i></label>
+                <div class="col-lg-6"><span data-ng-click="newStaff.staff_scheduler = !newStaff.staff_scheduler" class="icheck {{newStaff.staff_scheduler}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">View Only<i uib-tooltip="View Only"
+                                                                                                class="glyphicon glyphicon-question-sign"></i></label>
+                <div class="col-lg-6"><span data-ng-click="newStaff.staff_view_only = !newStaff.staff_view_only" class="icheck {{newStaff.staff_view_only}}"><i
+                        class="glyphicon glyphicon-ok"></i></span></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Password<i uib-tooltip="Password"
+                                                                                               class="glyphicon glyphicon-question-sign"></i></label>
+                <div class="col-lg-6">
+                    <input type="password" placeholder="Password" class="form-control"
+                    data-ng-model="newStaff.password"
+                />
+                </div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Confirm Password</label>
+                <div class="col-lg-6">
+                    <input type="password" placeholder="Confirm Password" class="form-control"
+                    data-ng-model="newStaff.confirm_password"
+                    />
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <p>
+                        <button data-ng-click="addStaff()" class="btn btn-green round-border full-width-80">Save
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

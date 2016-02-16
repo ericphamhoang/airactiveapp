@@ -1,0 +1,97 @@
+<div data-ng-controller="providerProfileController">
+    <h2>Hi {{user.provider.name}} {{user.provider.name}}<a class="font-size-18" href="edit.html"><i
+            class="glyphicon glyphicon-pencil"></i><span>EDIT</span></a></h2><br/>
+    <p>Today's Date: {{date | date : 'EEEE MMMM dd, yyyy'}}</p>
+    <p>Welcome to your Provider Portal for AirActive. In this portal you can manage your Profile and
+        Activity Schedules</p><br/><img src="../images/logo_big.png" class="profile-avatar"/>
+    <div class="clearfix"></div>
+    <a>Change Image</a><br/><br/>
+    <div class="row">
+        <form class="form-horizontal profile-information">
+
+            <!--Name-->
+            <span class="debug">user.provider.name</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Name</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.name}}</label></div>
+            </div>
+            <!--Branch-->
+            <span class="debug">user.provider.branch</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Branch</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.branch}}</label></div>
+            </div>
+            <!--Fitness Australian Reg-->
+            <span class="debug">user.provider.fitness_au_registration</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Fitness Australia Registration</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.fitness_au_registration}}</label>
+                </div>
+            </div>
+            <!--Address-->
+            <span class="debug">user.provider.address</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Address</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.address}}</label></div>
+            </div>
+            <!--Opening Hours-->
+            <span class="debug">user.provider.opening_hours</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Opening Hours</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.opening_hours}}</label></div>
+            </div>
+            <!--Website-->
+            <span class="debug">user.provider.website</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Website</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.website}}</label></div>
+            </div>
+            <!--Mobile Number-->
+            <span class="debug">user.mobile_number</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Phone</label>
+                <div class="col-sm-8"><label class="control-label">{{user.mobile_number}}</label></div>
+            </div>
+            <!--Email-->
+            <span class="debug">user.provider.email_provider</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Email</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.email_provider}}</label></div>
+            </div>
+            <!--Manager Info-->
+            <span class="debug">user.first_name user.last_name <br> user.email <br> user.mobile_number</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Manager</label>
+                <div class="col-sm-8">
+                    <label class="control-label text-left">
+                        {{ user.first_name}} {{user.last_name}}<br/>
+                        {{user.email}}<br/>
+                        {{user.mobile_number}}</label>
+                </div>
+            </div>
+            <!--Account And Billing-->
+            <span class="debug">user.provider.billing_first_name user.provider.billing_last_name <br> user.provider.billing_email <br> user.provider.billing_phone</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Accounts & Billing</label>
+                <div class="col-sm-8"><label class="text-left">{{ user.provider.billing_first_name}}
+                    {{user.provider.billing_last_name}}<br/> {{user.provider.billing_email}}<br/>
+                    {{user.provider.billing_phone}}</label></div>
+            </div>
+            <span class="debug">user.provider.facebook</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Facebook</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.facebook}}</label></div>
+            </div>
+            <span class="debug">user.provider.twitter</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Twitter</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.twitter}}</label></div>
+            </div>
+            <span class="debug">user.provider.instagram</span>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-left">Instagram</label>
+                <div class="col-sm-8"><label class="control-label">{{user.provider.instagram}}</label></div>
+            </div>
+        </form>
+    </div>
+</div>

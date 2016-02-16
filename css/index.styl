@@ -1,0 +1,23 @@
+@import "define.styl"
+
+.form-login
+  @extend .form
+  .p-sign-in
+    @extend .p-grey-text
+  //Email
+  input[type="email"]
+    @extend  .input-round
+  //Password
+  input[type="password"]
+    @extend  .input-round
+  //Login Button
+  .button-login
+    @extend .button-big-green
+  .a-forgot-password
+    margin-top 2rem
+    color #5e5a6f
+    text-decoration underline
+    font-weight bold
+    display block
+    &:hover
+      color #5e5a6f

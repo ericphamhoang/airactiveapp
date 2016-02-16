@@ -1,0 +1,102 @@
+<!--List, Edit, Delete and Create Promo Codes-->
+<div data-ng-controller="providerPromoCodesController" class="controller">
+    <div ng-hide="isAddView">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-10"><h2>Promo Code</h2></div>
+                <div class="col-lg-2">
+                    <!--set isAddView = true, then open create promo code view-->
+                    <button class="btn btn-green round-border full-width-80 pull-right"
+                            ng-click="isAddView=true"
+                    >Create Promo
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <select class="form-control round-border" data-ng-model="status">
+                        <option value="">All</option>
+                        <option value="true">Active Only</option>
+                    </select>
+                </div>
+                <div class="col-lg-8">
+                    <!--Search Input-->
+                    <input type="text" placeholder="Search" class="form-control round-border"
+                           data-ng-model="searchText"/>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-green round-border full-width">Search</button>
+                </div>
+            </div>
+            <table width="100%" class="table">
+                <thead>
+                <tr>
+                    <th width="20%"><b>Promo Code</b>
+                        <!--orderStatus-->
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </th>
+                    <th width="10%"><b>Discount (%)</b></th>
+                    <th width="20%"><b>Start Date</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th width="20%"><b>End Date</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th width="10%"><b>Status</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th width="20%"><b>Function</b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in promoCodes | filter:searchText | filter:status | orderBy :orderStatus track by $index">
+                    <!--name-->
+                    <td>
+                        <span ng-hide="item.isEdit">{{item.name}}</span>
+                        <input ng-show="item.isEdit" type="text" class="form-control" ng-model="item.name">
+                    </td>
+                    <!--discount-->
+                    <td>
+                        <span ng-hide="item.isEdit">{{item.discount}}</span>
+                        <input ng-show="item.isEdit" type="text" class="form-control" ng-model="item.discount">
+                    </td>
+                    <!--start date-->
+                    <td>
+                        <span ng-hide="item.isEdit">{{item.start_date | date:'MM/dd/yyyy'}}</span>
+                        <input ui-date ng-show="item.isEdit" type="text" class="form-control" ng-model="item.start_date">
+                    </td>
+                    <!--end date-->
+                    <td>
+                        <span ng-hide="item.isEdit">{{item.end_date | date:'MM/dd/yyyy'}}</span>
+                        <input ui-date ng-show="item.isEdit" type="text" class="form-control" ng-model="item.end_date">
+                    </td>
+                    <td><span class="icheck {{item.status}}"><i class="glyphicon glyphicon-ok"></i></span></td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <!--Edit button-->
+                                <td ng-hide="item.isEdit" ng-click="item.isEdit = true">
+                                    <i class="glyphicon glyphicon-pencil"></i><span>&nbsp;EDIT</span>
+                                </td>
+                                <!--Save button-->
+                                <td ng-show="item.isEdit" ng-click="updatePromocode(item); item.isEdit = false">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i><span>&nbsp;SAVE</span>
+                                </td>
+                                <td ng-show="item.status" ng-click="tooglePromocodeStatus(item)">
+                                    <i class="glyphicon glyphicon-pause"></i><span>&nbsp;DISABLE</span>
+                                    <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                                </td>
+                                <td ng-hide="item.status" ng-click="tooglePromocodeStatus(item)">
+                                    <i class="glyphicon glyphicon-play"></i><span>&nbsp;ENABLE</span>
+                                    <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!--Create Promo Code-->
+    <div ng-show="isAddView">
+        <div ng-include="addViewTemplate">
+        </div>
+    </div>
+</div>

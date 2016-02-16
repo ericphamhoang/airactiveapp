@@ -1,0 +1,56 @@
+prePadding(num)
+  .padding-top-{num}
+    padding-top unit(num, 'px') !important
+  .padding-bottom-{num}
+    padding-bottom unit(num, 'px') !important
+  .padding-left-{num}
+    padding-left unit(num, 'px') !important
+  .padding-right-{num}
+    padding-right unit(num, 'px') !important
+
+prePaddingLarge(num)
+  .padding-top-large-{num}
+    padding-top unit(num, 'px') !important
+  .padding-bottom-large-{num}
+    padding-bottom unit(num, 'px') !important
+  .padding-left-large-{num}
+    padding-left unit(num, 'px') !important
+  .padding-right-large-{num}
+    padding-right unit(num, 'px') !important
+
+prePaddingMedium(num)
+  //Mobile
+  .padding-top-medium-{num}
+    padding-top unit(num, 'px') !important
+  .padding-bottom-medium-{num}
+    padding-bottom unit(num, 'px') !important
+  .padding-left-medium-{num}
+    padding-left unit(num, 'px') !important
+  .padding-right-medium-{num}
+    padding-right unit(num, 'px') !important
+
+prePaddingSmall(num)
+  .padding-top-small-{num}
+    padding-top unit(num, 'px') !important
+  .padding-bottom-small-{num}
+    padding-bottom unit(num, 'px') !important
+  .padding-left-small-{num}
+    padding-left unit(num, 'px') !important
+  .padding-right-small-{num}
+    padding-right unit(num, 'px') !important
+
+
+for num in (0..100)
+  prePadding(num)
+
+@media (min-width: 1025px)
+  for num in (0..100)
+    prePaddingLarge(num)
+
+@media (max-width: 1024px) and (min-width: 768px)
+  for num in (0..100)
+    prePaddingMedium(num)
+
+@media (max-width: 767px)
+  for num in (0..100)
+    prePaddingSmall(num)

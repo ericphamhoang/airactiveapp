@@ -1,0 +1,12 @@
+preMargin(num)
+    .margin-top-{num}
+        margin-top unit(num, 'px') !important
+    .margin-bottom-{num}
+        margin-bottom unit(num, 'px') !important
+    .margin-left-{num}
+        margin-left unit(num, 'px') !important
+    .margin-right-{num}
+        margin-right unit(num, 'px') !important
+
+for num in (0..100)
+    preMargin(num)

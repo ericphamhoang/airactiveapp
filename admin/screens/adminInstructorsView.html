@@ -1,0 +1,49 @@
+<!--Created by eric on 15/12/2015.-->
+<div data-ng-controller="adminInstructorsController">
+    <h2>Instructors</h2>
+    <br/><!--Search-->
+    <div class="row">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-2"><select class="form-control round-border">
+                    <option>Show All</option>
+                    <option>Enable</option>
+                    <option>Disable</option>
+                </select></div>
+                <div class="col-lg-8">
+                    <input type="text" placeholder="Search" class="round-border form-control"
+                    data-ng-model="searchText"/>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-green round-border full-width">Search</button>
+                </div>
+            </div>
+        </form>
+    </div><!--Staff-->
+    <div class="row">
+        <table width="100%" class="table">
+            <thead>
+            <tr>
+                <th><b>First Name</b></th>
+                <th><b>Last Name</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                <th><b>Phone Number</b></th>
+                <th><b>Email</b></th>
+                <th><b>Profile</b></th>
+                <th><b>Status</b></th>
+                <th><b>Functions</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="instructor in instructors | filter:searchText track by $index">
+                <td>{{instructor.first_name}}</td>
+                <td>{{instructor.last_name}}</td>
+                <td>{{instructor.mobile_number}}</td>
+                <td>{{instructor.email}}</td>
+                <td><button data-ng-click="showProfile(instructor)" class="btn btn-green">Profile</button></td>
+                <td>{{instructor.active?'Enable':'Disable'}}</td>
+                <td><i class="glyphicon {{instructor.active?'glyphicon-pause':'glyphicon-play'}}"></i><span>&nbsp;{{instructor.active?'DISABLE':'ENABLE'}}</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

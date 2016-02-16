@@ -1,0 +1,100 @@
+<!--Created by eric on 15/12/2015.-->
+<div data-ng-controller="adminAdminsController">
+    <div data-ng-show="isListView" class="list-view">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-10"><h4>Admins</h4></div>
+                <div class="col-lg-2">
+                    <button data-ng-click="toggleAddAdmin()"
+                            class="btn btn-green round-border full-width-80 pull-right">Add Admin
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-2"><select class="form-control round-border">
+                    <option>Show All</option>
+                </select></div>
+                <div class="col-lg-8">
+                    <!--searchText model-->
+                    <input type="text" placeholder="Search" class="form-control round-border"
+                           data-ng-model="searchText"
+                    />
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-green round-border full-width">Search</button>
+                </div>
+            </div>
+            <table width="100%" class="table">
+                <thead>
+                <tr>
+                    <th><b>Username</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th><b>First Name</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th><b>Last Name</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                    <th><b>Status</b></th>
+                    <th><b>Functions</b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="admin in admins | filter:searchText track by $index">
+                    <td>{{admin.email}}</td>
+                    <td>{{admin.first_name}}</td>
+                    <td>{{admin.last_name}}</td>
+                    <td><span class="icheck {{admin.active}}"><i class="glyphicon glyphicon-ok"></i></span></td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td><i class="glyphicon glyphicon-pencil"></i><span>&nbsp;CHANGE PASSWORD</span></td>
+                                <td><i class="glyphicon glyphicon-pause"></i><span>&nbsp;DISABLE</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div data-ng-show="isAddAdminView" class="add-admin"><h2>Add Admin</h2><br/>
+        <form class="form-horizontal">
+            <!--<div class="form-group"><label class="control-label col-lg-2 text-left">Username*<i uib-tooltip="Username*"-->
+                                                                                                <!--class="glyphicon glyphicon-question-sign"></i></label>-->
+                <!--<div class="col-lg-6"><input type="text" placeholder="Username" class="form-control"/></div>-->
+            <!--</div>-->
+            <div class="form-group"><label class="control-label col-lg-2 text-left">First Name*</label>
+                <div class="col-lg-6"><input type="text" placeholder="First Name" class="form-control"
+                data-ng-model="newAdmin.first_name"
+                /></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Last Name*</label>
+                <div class="col-lg-6"><input type="text" placeholder="Last Name" class="form-control"
+                                             data-ng-model="newAdmin.last_name"
+                /></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Email*</label>
+                <div class="col-lg-6"><input type="text" placeholder="Email" class="form-control"
+                                             data-ng-model="newAdmin.email"
+                /></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Password*<i uib-tooltip="Password*"
+                                                                                                class="glyphicon glyphicon-question-sign"></i></label>
+                <div class="col-lg-6"><input type="password" placeholder="Password" class="form-control"
+                                             data-ng-model="newAdmin.password"/></div>
+            </div>
+            <div class="form-group"><label class="control-label col-lg-2 text-left">Confirm Password*</label>
+                <div class="col-lg-6"><input type="password" placeholder="Confirm Password" class="form-control"
+                                             data-ng-model="newAdmin.confirm_password"
+                /></div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <p>
+                        <button data-ng-click="addAdmin()" class="btn btn-green round-border full-width-80">Save
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

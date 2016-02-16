@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html data-ng-app="airActiveApp" lang="en">
+<head>
+    <title>Register Provider</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+
+    <!--Google Auto Complete-->
+    <script src='//maps.googleapis.com/maps/api/js?libraries=places'></script>
+    <script src="/bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <link rel="stylesheet" href="/bower_components/angular-google-places-autocomplete/src/autocomplete.css">
+    <!--End Google Auto Complete-->
+
+    <!--Register Provider Controller-->
+    <script src="controllers/registerProviderController.js"></script>
+
+    <!--UIkit -->
+    <link href="/bower_components/uikit/css/uikit.min.css" rel="stylesheet">
+    <link href="/bower_components/uikit/css/components/notify.min.css" rel="stylesheet">
+    <script src="/bower_components/uikit/js/uikit.min.js"></script>
+    <script src="/bower_components/uikit/js/components/notify.min.js"></script>
+    <!--End UIkit-->
+
+
+    <!--Bootstrap-->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <!--End Bootstrap-->
+
+    <!--Style-->
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!--End Style-->
+
+</head>
+<body data-ng-controller="registerProviderController">
+<div class="header">
+    <a href="/"><img src="/images/air_logo_white.png"></a>
+</div>
+<!--Css Loader-->
+<div class="cssload-loader" ng-show="showLoader">
+    <div class="cssload-flipper">
+        <div class="cssload-front"></div>
+        <div class="cssload-back"></div>
+    </div>
+</div>
+<!--End Css Loader-->
+<div class="entry-content text-center">
+    <form class="form-horizontal" novalidate>
+        <h2 class="margin-top-50">Provider Registration Page</h2>
+        <div name="information">
+            <p class="margin-bottom-0"><em class="instruction margin-bottom-2">You're one step away from accessing all
+                that
+                AirActive offers!</em>
+            </p>
+            <p class="margin-bottom-0"><em class="instruction margin-bottom-2">Your password will be sent to the
+                <strong>Manager
+                    Email</strong>
+                address
+                you provide below.</em></p>
+            <p class="margin-bottom-10">
+                <em class="instruction margin-bottom-2">Log In using your Email address, and Password</em>
+            </p>
+        </div>
+        <h3 class="margin-bottom-15">Business Details</h3>
+        <div class="row business-details text-left margin-left-0 margin-right-0">
+            <div class="col-lg-6 col-lg-offset-2">
+                <!--TODO: Name of Business-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Name of Business</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newProvider.name" class="form-control">
+                    </div>
+                </div>
+                <!--TODO: Branch-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Branch (if any)</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newProvider.branch" class="form-control">
+                    </div>
+                </div>
+                <!--TODO: Provider Type-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Provider Type</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="newProvider.providerType" ng-options="item as item.name for item in selectableProviderTypes track by item.id"></select>
+                    </div>
+                </div>
+                <!--Address of Business-->
+                <label class="debug">{{newProvider.googleLocation}}</label>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">
+                        Address of Business
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" g-places-autocomplete force-selection="true" class="form-control"
+                               data-ng-model="newProvider.googleLocation">
+                    </div>
+                </div>
+                <!--Business Phone-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Business Phone</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newProvider.phone" class="form-control">
+                    </div>
+                </div>
+                <!--Mobile Phone-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Mobile Phone</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newProvider.mobile" class="form-control">
+                    </div>
+                </div>
+                <!--Business Email-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Business Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" data-ng-model="newProvider.email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Confirm Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" data-ng-model="newProvider.email_confirm" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>Manager Details</h3>
+        <div name="information" class="margin-bottom-20">
+            <p class="margin-bottom-0"><em class="instruction">Please enter the detail of the primary business contact
+                for
+                your organisation, site
+                or branch</em></p>
+            <p class="margin-bottom-0"><em class="instruction">Your registration password will be sent to the email
+                address
+                below</em>
+            </p>
+            <p class="margin-bottom-5"><em class="instruction">For internal use only: This information will not be shown
+                to
+                Users</em></p>
+        </div>
+        <div class="row manager-details text-left margin-left-0 margin-right-0">
+            <div class="col-lg-6 col-lg-offset-2">
+                <!--Last Name-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Last Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" data-ng-model="newProvider.last_name">
+                    </div>
+                </div>
+                <!--First Name-->
+                <div class="form-group">
+                    <label class="control-label col-sm-4">First Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" data-ng-model="newProvider.first_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label tooltip-placement="right" uib-tooltip="You will be able to log in using this email address"
+                           class="control-label col-sm-4">Manager Email<i class="glyphicon glyphicon-question-sign"></i></label>
+                    <div class="col-sm-8">
+                        <input ng-focus="functions.showMessage('You will be able to log in using this email address')"
+                               type="email"
+                               data-ng-model="newProvider.email_provider" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Confirm Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" data-ng-model="newProvider.email_provider_confirm" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Manager Phone</label>
+                    <div class="col-sm-8">
+                        <input type="text" data-ng-model="newProvider.user_phone" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-offset-6">
+                    <button data-ng-click="registerProvider()" class="button-green margin-top-20 margin-bottom-50">
+                        Register with AirActive
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!----Notie JS-->
+<script src="/bower_components/notie/notie.js"></script>
+</body>
+</html>

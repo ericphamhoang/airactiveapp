@@ -1,0 +1,206 @@
+<div class="col-lg-12">
+    <!--50% to the right-->
+    <div class="single-view pull-right">
+        <div class="row">
+            <div class="col-lg-12">
+                <button class="btn btn-transparent green pull-left" ng-click="openEditView()">
+                    Edit
+                </button>
+                <button class="btn btn-transparent pink pull-left" ng-click="deleteActivity(singleViewItem)">
+                    Delete
+                </button>
+                <button class="btn btn-transparent yellow pull-left" data-ng-click="copyView.open()">
+                    Copy
+                </button>
+
+                <button class="btn btn-transparent pull-right" style="right: -30px; position: relative"
+                        ng-click="closeSingleView()">
+                    >>
+                </button>
+                <button class="btn btn-transparent black pull-right" data-ng-click="attendeesView.open()">
+                    Attendees
+                </button>
+            </div>
+        </div>
+        <div class="row no-margin-horizontal banner background-yellow">
+            <div class="col-lg-12 color-white">
+                {{singleViewItem.name}}, <span
+                    ng-repeat="category in singleViewItem.categories">[{{category.name}}] </span> ,
+                {{singleViewItem.startDate | date: "hh:mma, EEEE, MMMM, dd, yyyy"}}
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-horizontal">
+                <!--TODO: Activity Description-->
+                <h3>
+                    Activity Description
+                </h3>
+                <!--Name-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Activity Name</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.name}}</label>
+                </div>
+                <!--Category-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Category</label>
+                    <label class="control-label col-sm-4 text-left"><p
+                            ng-repeat="category in singleViewItem.categories">{{category.name}}</p></label>
+                </div>
+                <!--Activity Types-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Activity Types</label>
+                    <label class="control-label col-sm-4 text-left"><p
+                            ng-repeat="activity_type in singleViewItem.activity_types">{{activity_type.name}}</p>
+                    </label>
+                </div>
+                <!--Environment-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Environment</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.environment.name}}</label>
+                </div>
+                <!--Description-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Description</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.description}}</label>
+                </div>
+                <!--Allocate Instructor-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Allocate Instructor</label>
+                    <!--if has instructor-->
+                    <label ng-if="singleViewItem.instructor.id" class="control-label col-sm-4 text-left">{{singleViewItem.instructor.name}}</label>
+                    <div ng-if="!singleViewItem.instructor.id" class="col-sm-4">
+                        <span class="icheck false">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <!--Intensity-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Intensity</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.intensity.name}}</label>
+                </div>
+                <!--Price-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Price</label>
+                    <label class="control-label col-sm-4 text-left"><strong>{{singleViewItem.price | currency
+                        }}</strong></label>
+                </div>
+                <!--TODO: Where and when-->
+                <h3>
+                    Where & When is the activity
+                </h3>
+                <!--Date-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Date* <i
+                            class="glyphicon glyphicon-question-sign"></i></label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.startDate |
+                        date:'EEEE dd MMMM yyyy'}}</label>
+                </div>
+                <!--Start Time*-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Start Time* <i
+                            class="glyphicon glyphicon-question-sign"></i></label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.startTime |
+                        date:'HH:mm a'}}</label>
+                </div>
+                <!--Duration-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Duration* <i
+                            class="glyphicon glyphicon-question-sign"></i></label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.duration}}
+                        minutes</label>
+                </div>
+                <!--Address-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Address* <i
+                            class="glyphicon glyphicon-question-sign"></i></label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.address}}</label>
+                </div>
+                <!--Location-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Location</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.location}}</label>
+                </div>
+                <!--Recurrence-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Recurrences</label>
+                    <!--has recurrence-->
+                    <div ng-if="singleViewItem.is_recurrent">
+                        <label class="control-label col-sm-4 text-left">
+                            {{singleViewItem.recurrency_frequency }},
+                            <!--Daily-->
+                            <span ng-if="singleViewItem.recurrency_frequency == 'daily'">
+                                on every {{singleViewItem.recurrency_every}} days
+                            </span>
+                            <span ng-if="singleViewItem.recurrency_frequency == 'weekly'">on
+
+                                <!--days in week-->Wed Thu abc
+
+                                every {{singleViewItem.recurrency_every}} weeks</span>
+                            <span ng-if="singleViewItem.recurrency_frequency == 'monthly'">on
+
+                                <!--days in month-->
+                                1, 2, 3
+
+                                every {{singleViewItem.recurrency_every}} months</span>
+                        </label>
+                    </div>
+                    <!--dont has recurreence-->
+                    <div ng-if="!singleViewItem.is_recurrent">
+                        <div class="col-sm-4">
+                            <span class="icheck false">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--TODO: Activity Settings-->
+                <h3>
+                    Activity Settings
+                </h3>
+                <!--Frequency-->
+                <div class="form-group">
+                    <label class="control-label col-sm-2 text-left">Capacity</label>
+                    <label class="control-label col-sm-4 text-left">{{singleViewItem.capacity}}</label>
+                </div>
+                <!--Do you wish to flag this Activity as an "All Day" Activity? -->
+                <div class="form-group">
+                    <label class="control-label col-sm-4 text-left">Do you wish to flag this Activity as an "All Day" Activity? </label>
+                    <div class="col-sm-4">
+                        <span class="icheck {{singleViewItem.flag_all_day}}">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <!--Bookings Required before Midnight the previous day? -->
+                <div class="form-group">
+                    <label class="control-label col-sm-4 text-left">Bookings Required before Midnight the previous day? </label>
+                    <div class="col-sm-4">
+                        <span class="icheck {{singleViewItem.flag_midnight}}">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <!--Is this Activity Free For Members of your Business? -->
+                <div class="form-group">
+                    <label class="control-label col-sm-4 text-left">Is this Activity Free For Members of your Business? </label>
+                    <div class="col-sm-4">
+                        <span class="icheck {{singleViewItem.flag_free_members}}">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <!--Is the user required to pay any additional fees to access this -->
+                <div class="form-group">
+                    <label class="control-label col-sm-4 text-left">Is the user required to pay any additional fees to access this Activity? </label>
+                    <div class="col-sm-4">
+                        <span class="icheck {{singleViewItem.flag_adition_fees}}">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

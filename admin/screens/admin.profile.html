@@ -1,0 +1,38 @@
+<!--Created by eric on 15/12/2015.-->
+<div data-ng-controller="adminProfileController">
+    <div class="row">
+        <div class="col-lg-10"><h3>Super Admin</h3><br/>
+            <form class="form-horizontal">
+                <div class="form-group"><!--Username--><label class="control-label text-left col-lg-4">Username<i
+                        uib-tooltip="Username" class="glyphicon glyphicon-question-sign"></i></label><label
+                        class="control-label text-left col-lg-4">{{user.email}}</label>
+                </div>
+                <div class="form-group"><!--Username--><label class="control-label text-left col-lg-4">First
+                    Name</label><label data-ng-hide="isEditView" class="control-label text-left col-lg-4">{{user.first_name}}</label>
+                    <div class="col-lg-4"><input data-ng-show="isEditView" type="text" placeholder="First Name"
+                                                 data-ng-model="user.first_name" class="form-control"/></div>
+                </div>
+                <div class="form-group"><!--Username--><label class="control-label text-left col-lg-4">Last Name</label><label
+                        data-ng-hide="isEditView" class="control-label text-left col-lg-4">{{user.last_name}}</label>
+                    <div class="col-lg-4"><input data-ng-show="isEditView" type="text" placeholder="Last Name"
+                                                 data-ng-model="user.last_name" class="form-control"/></div>
+                </div>
+                <div class="form-group"><!--Username--><label
+                        class="control-label text-left col-lg-4">Email</label><label
+                                                                                     class="control-label text-left col-lg-4">{{user.email}}</label>
+                </div>
+                <div class="form-group"><!--Username--><label class="control-label text-left col-lg-4">Password<i
+                        uib-tooltip="Password" class="glyphicon glyphicon-question-sign"></i></label><label
+                        data-ng-hide="isEditView" class="control-label text-left col-lg-4">********</label>
+                    <div class="col-lg-4"><input data-ng-show="isEditView" type="text" placeholder="Password"
+                                                 data-ng-model="user.password" class="form-control"/></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2">
+            <button data-ng-click="toggleAdminProfileEditView()" class="btn btn-green round-border full-width-80">
+                {{editButtonName}}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Instructor</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <script src="/bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="/bower_components/angular-ui-date/src/date.js"></script>
+    <!--Angular Animate-->
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+    <!-- Angular Sanitizer-->
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--Style-->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="airActiveApp" ng-controller="instructorController">
+<div class="header">
+    <div class="row">
+        <div class="col-lg-10">
+            <a href="/">
+                <img src="../images/air_logo_white.png">
+            </a>
+        </div>
+        <div class="col-lg-2 margin-top-5" data-ng-click="viewInstructorProfile()">
+            <img class="img-circle pull-right" style="width: 40px; height: 40px" src="../images/a.jpg">
+            <div class="pull-right color-white margin-top-10 margin-right-10">
+                {{user.first_name}} {{user.last_name}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row entry-content">
+    <div class="col-lg-2 sidebar no-padding">
+        <!--<h4 ng-click="redirect('schedule.html')">View Schedule</h4>-->
+        <h4 class="base" ng-class="{true:menu[0]}"
+            ng-click="changeMenu(0, 'screens/instructorTermsAndConditionsView.html')">T&C's</h4>
+        <h4>&nbsp;</h4>
+        <h4 class="base" ng-class="{true:menu[1]}" ng-click="changeMenu(1, 'screens/instructor.help.html')">Help</h4>
+        <h4 class="base" ng-class="{true:menu[2]}" ng-click="changeMenu(2, 'screens/instructor.contact.html')">
+            Contact</h4>
+        <h4 ng-click="redirect('../logout/index.html')" class="color-pink">Log Out</h4>
+    </div>
+    <div class="col-lg-9 margin-top-20 margin-bottom-20 animated fadeIn">
+        <!--Instructor Provider-->
+        <div ng-include="template"></div>
+    </div>
+    <div class="col-lg-1">
+        <img class="width-100 margin-top-10 animated fadeIn" src="../images/fitness-australia-logo-square.png">
+    </div>
+</div>
+</body>
+<script>
+    var app = angular.module('airActiveApp', ['ui.tinymce', 'ngKookies', 'ui.date', 'naif.base64', 'ngAnimate', 'ngSanitize']);
+</script>
+<!--Instructor Controller-->
+<script src="controllers/instructorController.js"></script>
+<!--Instructor Terms and Conditions Controller-->
+<script src="controllers/instructorTermsAndConditionsController.js"></script>
+</html>

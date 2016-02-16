@@ -1,0 +1,23 @@
+<div data-ng-controller="adminAdvertisingController"><h3>Advertising</h3><br/>
+    <p>You can add any image with the size 800x80px to use as an advertisement.</p>
+    <p><input type="file" ng-model="advertising.image" base-sixty-four-input="" accept="image/*"/></p>
+    <p><img style="width:200px; height:auto" ng-src="data:image/png;base64, {{advertising.image.base64}}"/></p><br/>
+    <form class="form-horizontal">
+        <div class="form-group"><label class="control-label text-left col-lg-2">Allocate SOV*</label>
+            <div class="col-lg-4"><input type="text" ng-model="advertising.allocate_sov" placeholder="Allocate SOV"
+                                         class="form-control"/></div>
+        </div>
+        <div class="form-group"><label class="control-label text-left col-lg-2">Advertiser*</label>
+            <div class="col-lg-4"><input type="text" ng-model="advertising.advertiser" placeholder="Advertiser"
+                                         class="form-control"/></div>
+        </div>
+        <div class="form-group"><label class="control-label text-left col-lg-2">Club Member</label>
+            <div class="col-lg-4"><span ng-click="advertising.club_member = !advertising.club_member"
+                                        class="{{advertising.club_member}} icheck"><i
+                    class="glyphicon glyphicon-ok"></i></span></div>
+        </div>
+        <div class="col-lg-2">
+            <button data-ng-click="createAdvertising()" class="btn btn-green round-border full-width-80">Save</button>
+        </div>
+    </form>
+</div>

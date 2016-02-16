@@ -1,0 +1,51 @@
+<!--Created by eric on 15/12/2015.-->
+<div data-ng-controller="adminProvidersController">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-10"><h4>Providers</h4></div>
+        </div>
+    </form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-lg-2">
+                <select data-ng-model="status" class="form-control round-border"><option value="false">Enable</option>
+            </select></div>
+            <div class="col-lg-8"><input type="text" placeholder="Search" class="form-control round-border"
+            data-ng-model="textSearch"/></div>
+            <div class="col-lg-2">
+                <button class="btn btn-green round-border full-width">Search</button>
+            </div>
+        </div>
+        <table width="100%" class="table">
+            <thead>
+            <tr>
+                <th><b>Business Name</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                <th><b>Branch Details</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                <th><b>Phone</b><i class="glyphicon glyphicon-chevron-down"></i></th>
+                <th><b>Manager</b></th>
+                <th><b>Status</b></th>
+                <th><b>Functions</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="provider in providers | filter:textSearch | filter:status track by $index">
+                <td>{{provider.business_name}}</td>
+                <td>{{provider.branch}}</td>
+                <td>{{provider.phone}}</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="70%">{{provider.manager_name}}<span>&nbsp;</span></td>
+                            <td width="30%">
+                                <button data-ng-click="showProfile(provider)" class="btn btn-green">Profile</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>{{provider.is_disabled?'Disable':'Enable'}}</td>
+                <td><i class="glyphicon glyphicon-{{provider.is_disabled?'play':'pause'}}"></i><span>&nbsp;{{provider.is_disabled?'ENABLE':'DISABLE'}}</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

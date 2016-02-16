@@ -1,0 +1,68 @@
+<div class="col-lg-12">
+    <!--TODO: Attendees View-->
+    <div class="attendees-view pull-right">
+        <!--TODO: Title + Close button-->
+        <div class="row margin-left-0 margin-right-0">
+            <div class="col-lg-12">
+                <button class="btn btn-transparent padding-left-0">
+                Wednesday, July 23, 2015
+                </button>
+                <!--TODO: close button-->
+                <button class="btn btn-transparent pull-right" style="right: -10px; position: relative"
+                        ng-click="attendeesView.close()">
+                    X
+                </button>
+            </div>
+        </div>
+
+        <div class="row no-margin-horizontal banner background-yellow">
+            <div class="col-lg-12 color-white">
+                <strong>
+                    <span ng-repeat="category in singleViewItem.categories">{{category.name}}, </span>
+                    {{singleViewItem.startDate | date: "hh:mma, EEEE, MMMM dd, yyyy"}}</strong>
+            </div>
+        </div>
+        <!--TODO: table-->
+        <div class="row margin-left-0 margin-right-0">
+            <div class="col-lg-12">
+                <table width="100%" class="table">
+                    <thead>
+                    <tr>
+                        <th><b>Unique ID</b></th>
+                        <th><b>Last Name</b></th>
+                        <th><b>First Name</b></th>
+                        <th><b>Member</b></th>
+                        <th><b>Emergency Contact Name</b></th>
+                        <th><b>Emergency Mobile Phone</b></th>
+                        <th><b>User Email</b></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--TODO: ng repeat-->
+                    <tr ng-repeat="item in attendeesView.items">
+                        <!--Unique ID-->
+                        <td>{{item.customer_id}}</td>
+                        <!--Last Name-->
+                        <td>{{item.last_name}}</td>
+                        <!--First Name-->
+                        <td>{{item.first_name}}</td>
+                        <!--Is member or not-->
+                        <td>
+                            <span class="icheck {{item.is_member_for_this_provider}}">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                        </td>
+                        <!--Emergency Contact Name-->
+                        <td>{{item.emergency_contact_name}}</td>
+                        <!--Emergency Contact Number-->
+                        <td>{{item.emergency_contact_number}}</td>
+                        <!--Email-->
+                        <td>{{item.email}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,135 @@
+<div data-ng-controller="adminAdvertisementsController">
+    <div ng-show="isListView">
+        <div class="row">
+            <div class="col-lg-10">
+                <h4>Advertisements</h4><br/>
+            </div>
+            <div class="col-lg-2">
+                <button ng-click="toggleAddView()" class="btn btn-green round-border full-width-80 pull-right">
+                    Add
+                    Advertiser
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-lg-2"><select class="form-control round-border">
+                        <option>Show All</option>
+                        <option>Enable</option>
+                        <option>Disable</option>
+                    </select></div>
+                    <div class="col-lg-8">
+                        <input type="text" placeholder="Search" class="round-border form-control"
+                               data-ng-model="searchText"/>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-green round-border full-width">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="alert alert-success" role="alert">
+                To disable all advertising, please set all input boxes to zero.
+            </div>
+        </div>
+        <div ng-show="isListView" class="row">
+            <table width="100%" class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th style="width:20%"><b>Name</b></th>
+                    <th style="width:20%"><b>View Advertisement</b></th>
+                    <th style="width:20%"><b>Provider Ad</b></th>
+                    <th style="width:20%"><b>Enable</b></th>
+                    <th style="width:20%"><b>Members</b></th>
+                    <th style="width:20%"><b>Non-Members</b></th>
+                </tr>
+                </thead>
+                <tbody><!--ng repeat here-->
+                <tr ng-repeat="advertisement in advertisements track by $index">
+                    <td>
+                        <button class="btn btn-green">Edit</button>
+                    </td>
+                    <td>{{advertisement.name}}</td>
+                    <td>
+                        <button class="btn btn-green">View Advertisement</button>
+                    </td>
+                    <td>
+                    <span class="icheck">
+                        <i class="glyphicon glyphicon-ok"></i>
+                    </span>
+                    </td>
+                    <td>
+                    <span class="icheck {{advertisement.enabled}}">
+                        <i class="glyphicon glyphicon-ok"></i>
+                    </span>
+                    </td>
+                    <td>
+                        0
+                    </td>
+                    <td>
+                        0
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <strong>TOTAL SOV:</strong>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        100.0
+                    </td>
+                    <td>
+                        100.0
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-show="isAddView">
+        <div data-ng-controller="adminAdvertisingController">
+            <h3>Add Advertiser</h3>
+            <br/>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label text-left col-lg-2">Name</label>
+                    <div class="col-lg-4">
+                        <input type="text" ng-model="newAdvertisement.name"
+                                                 placeholder="Name"
+                                                 class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label text-left col-lg-2">Provider Ad</label>
+                    <div class="col-lg-4">
+                        <span class="icheck {{newAdvertisement.provider_ad}}" ng-click="newAdvertisement.provider_ad = !newAdvertisement.provider_ad">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label text-left col-lg-2">Upload</label>
+                    <div class="col-lg-3">
+                        <input type="file" ng-model="newAdvertisement.image" base-sixty-four-input="" accept="image/*"/>
+                    </div>
+                    <div class="col-lg-2">
+                        <img style="width:200px; height:auto" ng-src="data:image/png;base64, {{newAdvertisement.image.base64}}"/>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button data-ng-click="createAdvertisement()" class="btn btn-green round-border full-width-80">Add to Table
+                    </button>
+                </div>
+            </form>
+            <p></p>
+            <br/>
+        </div>
+    </div>
+</div>

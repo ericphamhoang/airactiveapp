@@ -1,0 +1,37 @@
+<div class="content" data-ng-controller="loginController">
+    <div class="row margin-left-0 margin-right-0">
+        <div class="col-md-2 col-md-offset-5">
+            <!--Login Form-->
+            <form data-ng-submit="loginController_functions.login()" novalidate class="animated fadeIn">
+                <div class="form-login text-center animated">
+                    <p>
+                        <img class="width-100 margin-top-100" src="/images/logo_big.png">
+                    </p>
+                    <p class="p-sign-in">Sign in to get started</p>
+                    <div name="email">
+                        <input name="email" class="input-round full-width" type="email" placeholder="Email address"
+                               data-ng-model="user.email"
+                               required>
+                    </div>
+                    <div name="password">
+                        <input name="password" class="input-round full-width" type="password" placeholder="Password"
+                               data-ng-model="user.password"
+                               required>
+                    </div>
+                    <!--Login Button-->
+                    <button class="button-big-green margin-top-5 margin-bottom-5">
+                        Login
+                    </button>
+                </div>
+            </form>
+            <div class="text-center">
+                <!--   TODO: register button-->
+                <button class="button-big-blue margin-top-5 margin-bottom-5"
+                        onclick="window.location.href='../register/index.html'">Register
+                </button>
+                <!--   TODO: forgot password button-->
+                <a href="/forgot-password/" class="a-forgot-password">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+</div>

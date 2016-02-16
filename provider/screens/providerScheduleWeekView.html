@@ -1,0 +1,128 @@
+<div class="menu row">
+    <div class="col-lg-5">
+        <div class="col-lg-3 active">View Schedule</div>
+        <div class="col-lg-2">T&C's</div>
+        <div class="col-lg-1">&nbsp;</div>
+        <div class="col-lg-2">Help</div>
+        <div class="col-lg-2">Contact</div>
+        <div class="col-lg-2"><a href="/logout/">Log Out</a></div>
+    </div>
+</div>
+<div class="row schedule-content">
+    <div class="col-lg-3">
+        <div kendo-calendar="" ng-model="uiConfig.calendar.defaultDate"></div>
+        <div class="clearfix"></div>
+        <strong>Filters
+            <hr/>
+        </strong>
+        <div class="row"><h4><i class="glyphicon glyphicon-menu-up"></i>&nbsp;&nbsp;Show Providers</h4>
+            <form class="form-horizontal"><!--All-->
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.showProvider.all = !calendarObjects.filterOptions.showProvider.all"
+                            class="{{calendarObjects.filterOptions.showProvider.all}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">All</label></div><!--Only with activity-->
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.showProvider.only_with_activity = !calendarObjects.filterOptions.showProvider.only_with_activity"
+                            class="{{calendarObjects.filterOptions.showProvider.only_with_activity}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">Only with Activity</label></div>
+            </form>
+            <h4><i class="glyphicon glyphicon-menu-up"></i>&nbsp;&nbsp;Time of Day</h4>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.timeOfDay.early = !calendarObjects.filterOptions.timeOfDay.early"
+                            class="{{calendarObjects.filterOptions.timeOfDay.early}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">Early</label></div>
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.timeOfDay.am = !calendarObjects.filterOptions.timeOfDay.am"
+                            class="{{calendarObjects.filterOptions.timeOfDay.am}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">AM</label></div>
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.timeOfDay.pm = !calendarObjects.filterOptions.timeOfDay.pm"
+                            class="{{calendarObjects.filterOptions.timeOfDay.pm}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">PM</label></div>
+                <div class="form-group">
+                    <div class="col-sm-1 col-sm-offset-2 no-padding"><span
+                            ng-click="calendarObjects.filterOptions.timeOfDay.late = !calendarObjects.filterOptions.timeOfDay.late"
+                            class="{{calendarObjects.filterOptions.timeOfDay.late}} icheck small-square"><i
+                            class="glyphicon glyphicon-stop"></i></span></div>
+                    <label class="col-sm-6 control-label text-left filter">Late</label></div>
+            </form>
+            <h4><i class="glyphicon glyphicon-menu-up"></i>&nbsp;&nbsp;Provider</h4><h4><i
+                    class="glyphicon glyphicon-menu-up"></i>&nbsp;&nbsp;Capacity</h4><h4><i
+                    class="glyphicon glyphicon-menu-up"></i>&nbsp;&nbsp;Activity Name</h4></div>
+    </div>
+    <div class="col-lg-9"><!--Calendar Selector-->
+        <div class="row calendar-selector">
+            <div class="pull-left"><span ng-click="calendarObjects.previousDate()"><i
+                    class="glyphicon glyphicon-triangle-left"></i></span></div>
+            <div class="pull-left text-center calendar-selector-date"><span>{{uiConfig.calendar.defaultDate | date : 'EEEE MMMM dd, yyyy'}}</span>
+            </div>
+            <div class="pull-left"><span ng-click="calendarObjects.nextDate()"><i
+                    class="glyphicon glyphicon-triangle-right"></i></span></div>
+        </div><!--Active Filters-->
+        <div class="row"><br/>
+            <p>Active Filters</p>
+            <div class="col-lg-9 active-filter">
+                <div class="row">
+                    <div class="col-lg-9 active-filter-fields">
+                        <form class="form-horizontal">
+                            <div class="form-group"><label class="control-label text-left col-lg-3">View:</label><label
+                                    class="control-label text-left col-lg-9"><span
+                                    ng-repeat="view in calendarObjects.filters.view">{{view}}{{$last ? '' : ', '}}</span></label>
+                            </div>
+                            <div class="form-group"><label class="control-label text-left col-lg-3">Time of Day:</label><label
+                                    class="control-label text-left col-lg-9"><span
+                                    ng-repeat="timeOfDay in calendarObjects.filters.timeOfDay">{{timeOfDay}}{{$last ? '' : ', '}}</span></label>
+                            </div>
+                            <div class="form-group"><label
+                                    class="control-label text-left col-lg-3">Provider:</label><label
+                                    class="control-label text-left col-lg-9"><span
+                                    ng-repeat="provider in calendarObjects.filters.provider">{{provider}}{{$last ? '' : ', '}}</span></label>
+                            </div>
+                            <div class="form-group"><label
+                                    class="control-label text-left col-lg-3">Capacity:</label><label
+                                    class="control-label text-left col-lg-9"><span
+                                    ng-repeat="capacity in calendarObjects.filters.capacity">{{capacity}}{{$last ? '' : ', '}}</span></label>
+                            </div>
+                            <div class="form-group"><label class="control-label text-left col-lg-3">Activity
+                                Name:</label><label class="control-label text-left col-lg-9"><span
+                                    ng-repeat="activityName in calendarObjects.filters.activityName">{{activityName}}{{$last ? '' : ', '}}</span></label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 text-right filter-btn-group">
+                        <p>
+                            <button ng-click="" class="btn btn-green full-width">Apply Filters</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-pink full-width">Clear Filters</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-right views"><h3><span ng-click="calendarObjects.agendaDayView()"
+                                                              class="{{calendarObjects.isAgendaDayView}}">Day&nbsp;</span><span
+                    ng-click="calendarObjects.agendaWeekView()"
+                    class="{{calendarObjects.isAgendaWeekView}}">Week&nbsp;</span><span
+                    ng-click="calendarObjects.todayView()">| Today</span></h3></div>
+            <div ui-calendar="uiConfig.calendar" ng-model="events" class="ui-calendar"></div>
+        </div>
+    </div>
+</div>
+<!--single view-->
+<div class="single-view-wrapper row"
+     ng-show="isSingleView">
+    <div ng-include="'../screens/scheduler/singleView.html'"></div>
+</div>

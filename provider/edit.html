@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html ng-app="airActiveApp">
+<head><title>Provider Edit</title>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!--Style-->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../css/fonts/stylesheet.css" type="text/css" charset="utf-8"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <!--End Style-->
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/ngkookies/ngKookies.min.js"></script>
+    <script src="/bower_components/chosen/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/chosen/chosen.min.css" type="text/css">
+    <script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="/bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
+    <script src="/bower_components/angular-chosen/angular-chosen.js"></script>
+    <script src="controllers/providerEditController.js"></script>
+
+    <!--ng Dialog-->
+    <link href="/bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+    <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <!--end ng Dialog-->
+
+    <!--Time Picker-->
+    <script src="/bower_components/jquery-timepicker-jt/jquery.timepicker.min.js"></script>
+    <link href="/bower_components/jquery-timepicker-jt/jquery.timepicker.css" rel="stylesheet">
+    <script src="/bower_components/angular-jquery-timepicker/src/timepickerdirective.min.js"></script>
+    <!--End Time Picker-->
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="header">
+    <a href="index.html"><img src="../images/air_logo_white.png"></a>
+</div>
+<div data-ng-controller="providerEditController">
+    <div class="entry-content">
+        <div class="row margin-left-0 margin-right-0" ng-show="isStep1">
+            <form name="providerEdit" class="form-horizontal" novalidate>
+                <div class="col-lg-11 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <br>
+                            <h2>Complete your provider profile</h2>
+                            <p class="information">Welcome to the Provider Portal for AirActive! Please create your
+                                profile
+                                to complete your setup</p>
+
+                            <div class="form-group">
+                                <!--Name-->
+                                <label class="col-sm-4 control-label text-left">Name*</label>
+                                <div class="col-sm-8">
+                                    <input name="user" type="text" placeholder="Business name"
+                                           data-ng-model="user.provider.name"
+                                           class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <!--Branch-->
+                                <label class="col-sm-4 control-label text-left">Branch</label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="Address"
+                                           data-ng-model="user.provider.branch"
+                                           class="form-control">
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <label class="col-sm-4 control-label text-left">Fitness Australia
+                                    Registration</label>
+                                <div class="col-sm-8"><input type="text"
+                                                             data-ng-model="user.provider.fitness_au_registration"
+                                                             placeholder="Fitness Australia Registration"
+                                                             class="form-control"><em class="instruction">This may be
+                                    used for special offers and discounts</em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Address*</label>
+                                <div class="col-sm-8">
+                                    <input name="address" type="text" ng-autocomplete="result"
+                                           data-ng-model="user.provider.address" placeholder="Address"
+                                           class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group"><label class="col-sm-4 control-label text-left">Country*</label>
+                                <div class="col-sm-8">
+                                    <select name="country" data-ng-model="user.provider.countryObj"
+                                            data-ng-options="option.name for option in countries track by option.id"
+                                            class="form-control" required></select>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <label class="col-sm-4 control-label text-left">Postcode*</label>
+                                <div class="col-sm-8">
+                                    <input name="postcode" type="text" data-ng-model="user.provider.postcode"
+                                           placeholder="Postcode" class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Phone Number*</label>
+                                <div class="col-sm-8">
+                                    <input name="phone_number" type="text" data-ng-model="user.provider.phone"
+                                           placeholder="Phone Number"
+                                           class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Email Address*</label>
+                                <div class="col-sm-8">
+                                    <input type="email" name="email_address"
+                                           data-ng-model="user.provider.email_provider"
+                                           placeholder="Email Address" class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br></div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group"><label
+                                    class="col-sm-4 control-label text-left">State/Region*</label>
+                                <div class="col-sm-8">
+                                    <select name="state" data-ng-model="user.provider.stateObj"
+                                            data-ng-options="option.name for option in states track by option.id"
+                                            class="form-control" required></select>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <label class="col-sm-4 control-label text-left">City*</label>
+                                <div class="col-sm-8"><input name="city" type="text" data-ng-model="user.provider.city"
+                                                             placeholder="City" class="form-control" required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Mobile Number</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.mobile"
+                                                             placeholder="Mobile Number" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Website</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.website"
+                                                             placeholder="Website" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br></div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4"><h2>Key Personnel</h2><br>
+                            <h3>Manager</h3><br>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left">Last Name*</label>
+                                <div class="col-sm-8">
+                                    <input name="manager_last_name" type="text" placeholder="Last Name"
+                                           class="form-control"
+                                           ng-model="user.last_name"
+                                           required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">First Name*</label>
+                                <div class="col-sm-8">
+                                    <input name="manager_first_name" type="text" placeholder="First Name"
+                                           class="form-control"
+                                           ng-model="user.first_name"
+                                           required>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Email (if different)</label>
+                                <div class="col-sm-8"><input data-ng-model="user.email" type="text" placeholder="Email"
+                                                             class="form-control" disabled></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Phone (if different)</label>
+                                <div class="col-sm-8"><input data-ng-model="user.mobile_number" type="text"
+                                                             placeholder="Phone" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br></div>
+
+                            <h3>Accounts & Billing</h3><br>
+                            <div class="form-group"><label class="col-sm-4 control-label text-left">Last Name*</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.billing_last_name"
+                                                             placeholder="Last Name" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">First Name*</label>
+                                <div class="col-sm-8"><input type="text"
+                                                             data-ng-model="user.provider.billing_first_name"
+                                                             placeholder="First Name" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Email (if different)</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.billing_email"
+                                                             placeholder="Email" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Phone (if different)</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.billing_phone"
+                                                             placeholder="Phone" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br></div>
+
+                            <div class="row">
+                                <div class="col-lg-4 margin-bottom-50">
+                                    <button ng-click="nextStep()" class="btn btn-green round-border full-width-80">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row margin-left-0 margin-right-0" ng-hide="isStep1">
+            <div class="col-lg-11 col-lg-offset-1">
+                <div class="row">
+                    <br>
+                    <h2>Complete your provider profile</h2>
+                    <div class="col-lg-4">
+                        <form class="form-horizontal">
+                            <div class="form-group"><label class="col-sm-4 control-label text-left">Website</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.website"
+                                                             placeholder="Website" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Facebook</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.facebook"
+                                                             placeholder="Facebook" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Twitter</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.twitter"
+                                                             placeholder="Twitter" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Instagram</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.instagram"
+                                                             placeholder="Instagram" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">About us</label>
+                                <div class="col-sm-8"><textarea type="text" data-ng-model="user.provider.about_us"
+                                                                placeholder="About us"
+                                                                class="form-control"></textarea><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Facilities</label>
+                                <div class="col-sm-8"><textarea type="text" data-ng-model="user.provider.facilities"
+                                                                placeholder="Facilities"
+                                                                class="form-control"></textarea><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Opening Hours</label>
+                                <div class="col-sm-8"><textarea type="text" data-ng-model="user.provider.opening_hours"
+                                                                placeholder="Opening Hours"
+                                                                class="form-control"></textarea><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Size (m2) </label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.size"
+                                                             placeholder="Size (m2)" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br></div>
+                        </form>
+                        <h2>Schedule Time Settings</h2><br>
+                        <p>These times will be used to create the time range for your daily schedule</p><br>
+                        <form class="form-horizontal">
+                            <div class="form-group"><label class="col-sm-4 control-label text-left">Daily Schedule Start
+                                Time</label>
+                                <div class="col-sm-8"><input type="text" ui-timepicker="timePickerOptions" data-ng-model="user.provider.schedule_from"
+                                                             placeholder="6:00am" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Daily Schedule Stop Time</label>
+                                <div class="col-sm-8"><input type="text" ui-timepicker="timePickerOptions" data-ng-model="user.provider.schedule_to"
+                                                             placeholder="9:00pm" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br></div>
+                        </form>
+                        <br>
+                        <h2>Bank Details</h2><br>
+                        <form class="form-horizontal">
+                            <div class="form-group"><label class="col-sm-4 control-label text-left">Bank Name*</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.bank_name"
+                                                             placeholder="Name" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Branch*</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.bank_branch"
+                                                             placeholder="Branch" class="form-control"><em></em></div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">Account Name*</label>
+                                <div class="col-sm-8"><input type="text" data-ng-model="user.provider.bank_account_name"
+                                                             placeholder="Account Name" class="form-control"><em></em>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br><label class="col-sm-4 control-label text-left">BSB/ Account*</label>
+                                <div class="col-sm-3"><input type="text" data-ng-model="user.provider.bank_bsb"
+                                                             placeholder="BSB" class="form-control"></div>
+                                <div class="col-sm-5"><input data-ng-model="user.provider.bank_account_number"
+                                                             type="text" placeholder="Account" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <p>I have read and accept the <a ng-click="showTermAndCondition()">Terms & Conditions</a></p>
+                        <span ng-click="user.provider.terms = !user.provider.terms" class="icheck {{user.provider.terms}}"><i
+                                class="glyphicon glyphicon-ok"></i></span>
+                        <br>
+                        <br>
+                        <!--Finish Button-->
+                        <div class="row">
+                            <div class="col-lg-4 margin-bottom-50">
+                                <button data-ng-click="updateProvider()"
+                                        class="btn btn-green full-width-80 round-border">
+                                    Finish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--UIkit -->
+<link href="../bower_components/uikit/css/uikit.min.css" rel="stylesheet">
+<link href="../bower_components/uikit/css/components/notify.min.css" rel="stylesheet">
+<script src="../bower_components/uikit/js/uikit.min.js"></script>
+<script src="../bower_components/uikit/js/components/notify.min.js"></script>
+<!--End UIkit-->
+<script src="../bower_components/notie/notie.js"></script>
+<style>
+    .ngdialog.ngdialog-theme-default
+    {
+        padding-top: 20px;
+    }
+    .ngdialog.ngdialog-theme-default .ngdialog-content
+    {
+        width: 80%;
+    }
+</style>
+</body>
+</html>
